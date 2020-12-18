@@ -1,27 +1,33 @@
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
 import TaskList from './components/taskList';
+import TaskInput from './components/taskInput';
 import { Task } from './types';
+import reducer from './reducers';
+import AppContext from './contexts/AppContext';
 
-const initialState: Task[] = [
-  {
-    id: 1,
-    title: 'Hello',
-    isDone: false,
-  },
-  {
-    id: 2,
-    title: 'Hello2',
-    isDone: false,
-  },
-];
+const initialState = {
+  tasks: [
+    {
+      id: 1,
+      title: 'Hello',
+      isDone: false,
+    },
+    {
+      id: 2,
+      title: 'Hello2',
+      isDone: false,
+    },
+  ],
+};
 
 const App: React.FC = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [tasks, setTasks] = useState(initialState);
+  // @ts-ignore
+  const [state, dispatch] = useReducer(reducer, initialState);
   return (
-    <div>
-      <TaskList tasks={tasks} />
-    </div>
+    <AppContext.Provider value={{ state, dispatch }}>
+      <TaskList />
+      <TaskInput />
+    </AppContext.Provider>
   );
 };
 

@@ -1,17 +1,14 @@
-import React from 'react';
-import { Task } from '../types';
+import React, { useContext } from 'react';
+import AppContext from '../contexts/AppContext';
 import TaskItem from './taskItem';
-
-type Props = {
-  tasks: Task[];
-};
+import { Task } from '../types';
 
 // tasksは分割代入で取得する
-const TaskList: React.FC<Props> = ({ tasks }) => {
-  console.log(tasks);
+const TaskList: React.FC = () => {
+  const { state } = useContext(AppContext);
   return (
     <div>
-      {tasks.map((task) => (
+      {state.tasks.map((task: Task) => (
         <TaskItem task={task} key={task.id} />
       ))}
     </div>

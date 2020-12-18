@@ -14,6 +14,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
+    "redux": "^4.0.5",
     "stylelint": "^13.7.2",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-standard": "^20.0.0",
@@ -28,8 +29,8 @@
     "lint": "$(npm bin)/eslint --fix -c ./.eslintrc.js 'src/**/*.{js,jsx}' && prettier --write \"./**/*.js\" \"./**/*.jsx\" && stylelint --fix src/**/*.scss",
     "lint:js": "$(npm bin)/eslint --fix -c ./.eslintrc.js 'src/**/*.{js,jsx}'",
     "format:js": "prettier --write 'src/**/*.{js,jsx}'",
-    "lint:css":"stylelint --fix src/**/*.scss",
-    "format:css":"prettier-stylelint --quiet --write src/**/*.scss"
+    "lint:css": "stylelint --fix src/**/*.scss",
+    "format:css": "prettier-stylelint --quiet --write src/**/*.scss"
   },
   "browserslist": {
     "production": [
