@@ -1,6 +1,10 @@
 import React, { useReducer } from 'react';
-import TaskList from './components/taskList';
-import TaskInput from './components/taskInput';
+import './styles/base.scss';
+import Layout from './components/Layout/Layout';
+import TaskList from './components/taskList/taskList';
+import TaskInput from './components/taskInput/taskInput';
+import Controller from './components/Controller/Controller';
+import Filter from './components/Filter/Filter';
 import { Task } from './types';
 import reducer from './reducers';
 import AppContext from './contexts/AppContext';
@@ -18,6 +22,7 @@ const initialState = {
       isDone: false,
     },
   ],
+  filter: '',
 };
 
 const App: React.FC = () => {
@@ -25,8 +30,12 @@ const App: React.FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <AppContext.Provider value={{ state, dispatch }}>
-      <TaskList />
-      <TaskInput />
+      <Layout>
+        {/*<Filter />*/}
+        <TaskList />
+        <Controller />
+        <TaskInput />
+      </Layout>
     </AppContext.Provider>
   );
 };
