@@ -22,7 +22,7 @@ const initialState = {
       isDone: false,
     },
   ],
-  filter: '',
+  filter: 'ALL',
 };
 
 const App: React.FC = () => {
@@ -31,7 +31,7 @@ const App: React.FC = () => {
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       <Layout>
-        {/*<Filter />*/}
+        <Filter />
         <TaskList />
         <Controller />
         <TaskInput />

@@ -7,18 +7,17 @@ const Filter = () => {
     state: { filter },
     dispatch,
   } = useContext(AppContext);
-  const [filterType, setFilterType] = useState('ALL');
-  useEffect(() => {
+  const setFilter = (value: string) => {
     dispatch({
       type: SET_FILTER,
-      filterType,
+      value,
     });
-  }, [filter]);
+  };
   return (
-    <select onChange={(e) => setFilterType(e.target.value)}>
-      <option value="SET_ALL">全て</option>
-      <option value="SET_DONE">完了のみ</option>
-      <option value="SET_YET">未完了のみ</option>
+    <select onChange={(e) => setFilter(e.target.value)} value={filter}>
+      <option value="ALL">全て</option>
+      <option value="DONE">完了のみ</option>
+      <option value="YET">未完了のみ</option>
     </select>
   );
 };

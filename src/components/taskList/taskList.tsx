@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import AppContext from '../../contexts/AppContext';
 import TaskItem from '../taskItem/taskItem';
 import { Task } from '../../types';
@@ -6,14 +6,21 @@ import Style from './taskList.module.scss';
 
 // tasksは分割代入で取得する
 const TaskList: React.FC = () => {
-  const { state } = useContext(AppContext);
-  // const taskList = state.tasks.filter((task: { isDone: boolean }) => {
-  //   if (state.filter === 'SET_ALL') return task;
-  //   return (task.isDone = state.filter === 'SET_DONE');
-  // });
+  const {
+    state: { filter, tasks },
+  } = useContext(AppContext);
+  const [displayTasks, setDisplayTasks] = useState([tasks]);
+  useEffect(() => {
+    const taskList = tasks.filter((task: { isDone: boolean }) => {
+      if (filter === 'ALL') return true;
+      return task.isDone === (filter === 'DONE');
+    });
+    setDisplayTasks(taskList);
+  }, [filter]);
+
   return (
     <ul className={Style.list}>
-      {state.tasks.map((task: Task) => (
+      {displayTasks.map((task: Task) => (
         <TaskItem task={task} key={task.id} />
       ))}
     </ul>
