@@ -16,12 +16,12 @@ const TaskList: React.FC = () => {
       return task.isDone === (filter === 'DONE');
     });
     setDisplayTasks(taskList);
-  }, [filter]);
+  }, [filter, tasks]);
 
   return (
     <ul className={Style.list}>
       {displayTasks.map((task: Task) => (
-        <TaskItem task={task} key={task.id} />
+        <TaskItem task={task} key={String(task.id)} />
       ))}
     </ul>
   );
