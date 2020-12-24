@@ -7,3 +7,4 @@ export const ALL_YET = 'ALL_YET';
 export const FILTER_TASK = 'FILTER_TASK';
 
 export const SET_FILTER = 'SET_FILTER';
+export const FETCH_TASKS = 'FETCH_TASKS';

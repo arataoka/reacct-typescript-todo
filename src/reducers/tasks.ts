@@ -6,6 +6,7 @@ import {
   ALL_DONE,
   ALL_YET,
   FILTER_TASK,
+  FETCH_TASKS,
 } from '../actions';
 
 // ここはtasksのみの状態を管理しているところになる。
@@ -33,6 +34,8 @@ const tasks = (state = [], action: any) => {
       return state.map((task: { id: number; isDone: boolean }) => {
         return { ...task, isDone: false };
       });
+    case FETCH_TASKS:
+      return action.tasks;
     default:
       return state;
   }

@@ -8,6 +8,7 @@ import Style from './taskList.module.scss';
 const TaskList: React.FC = () => {
   const {
     state: { filter, tasks },
+    dispatch,
   } = useContext(AppContext);
   const [displayTasks, setDisplayTasks] = useState([tasks]);
   useEffect(() => {
@@ -17,7 +18,20 @@ const TaskList: React.FC = () => {
     });
     setDisplayTasks(taskList);
   }, [filter, tasks]);
-
+  useEffect(() => {
+    console.log('fetch');
+    const json = localStorage.getItem('todo');
+    console.log(json);
+    const items = json ? JSON.parse(json) : [];
+    dispatch({
+      type: 'FETCH_TASKS',
+      tasks: items,
+    });
+  }, []);
+  useEffect(() => {
+    console.log('save');
+    localStorage.setItem('todo', JSON.stringify(tasks));
+  }, [tasks]);
   return (
     <ul className={Style.list}>
       {displayTasks.map((task: Task) => (
