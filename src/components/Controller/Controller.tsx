@@ -1,17 +1,19 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useCallback } from 'react';
 import AppContext from '../../contexts/AppContext';
+import Style from './_Controller.module.scss';
 
 const Controller = () => {
   const {
     state: { tasks },
     dispatch,
   } = useContext(AppContext);
-  const term = (isDone: boolean) => {
-    if (tasks.every((task: { isDone: boolean }) => task.isDone === isDone)) {
-      setOrder(!isDone); //全て完了なら未完了に 全て未完了なら完了に
-    }
-  };
-  useEffect(() => {
+
+  useCallback(() => {
+    const term = (isDone: boolean) => {
+      if (tasks.every((task: { isDone: boolean }) => task.isDone === isDone)) {
+        setOrder(!isDone); //全て完了なら未完了に 全て未完了なら完了に
+      }
+    };
     term(true);
     term(false);
   }, [tasks]);
@@ -29,10 +31,23 @@ const Controller = () => {
       order,
     });
   };
+  const buttonClass = order
+    ? Style['button--complete']
+    : Style['button--incomplete'];
   return (
-    <div>
-      <button onClick={toggleIsDone}>{buttonName}</button>
-      <button onClick={deleteAll}>全て削除する</button>
+    <div className={Style.wrapper}>
+      <button
+        className={`${Style.button} ${buttonClass}`}
+        onClick={toggleIsDone}
+      >
+        {buttonName}
+      </button>
+      <button
+        className={`${Style['button--delete']} ${Style.button}`}
+        onClick={deleteAll}
+      >
+        全て削除する
+      </button>
     </div>
   );
 };

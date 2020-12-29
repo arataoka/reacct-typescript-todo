@@ -26,7 +26,9 @@ const TaskInput = () => {
         }}
         value={text}
       />
-      <button onClick={addItem}>ボタン</button>
+      <button className={Style.button} onClick={addItem}>
+        ボタン
+      </button>
     </>
   );
 };

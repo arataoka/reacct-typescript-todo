@@ -5,7 +5,6 @@ import TaskList from './components/taskList/taskList';
 import TaskInput from './components/taskInput/taskInput';
 import Controller from './components/Controller/Controller';
 import Filter from './components/Filter/Filter';
-import { Task } from './types';
 import reducer from './reducers';
 import AppContext from './contexts/AppContext';
 
@@ -26,7 +25,6 @@ const initialState = {
 };
 
 const App: React.FC = () => {
-  // @ts-ignore
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <AppContext.Provider value={{ state, dispatch }}>

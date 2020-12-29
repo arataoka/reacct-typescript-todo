@@ -1,0 +1,25 @@
+.wrapper{
+  margin-bottom: 15px;
+}
+
+.button{
+  color: white;
+  cursor:pointer;
+  &:not(:first-child){
+    margin-left: 10px;
+  }
+
+  &--complete{
+    background-color: dodgerblue;
+  }
+
+  &--incomplete{
+    background-color: darkorange;
+  }
+
+  &--delete{
+    background-color: red;
+  }
+}
+
+

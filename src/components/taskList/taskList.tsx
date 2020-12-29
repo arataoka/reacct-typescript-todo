@@ -19,24 +19,26 @@ const TaskList: React.FC = () => {
     setDisplayTasks(taskList);
   }, [filter, tasks]);
   useEffect(() => {
-    console.log('fetch');
     const json = localStorage.getItem('todo');
-    console.log(json);
     const items = json ? JSON.parse(json) : [];
     dispatch({
       type: 'FETCH_TASKS',
       tasks: items,
     });
-  }, []);
+  }, [dispatch]);
   useEffect(() => {
-    console.log('save');
     localStorage.setItem('todo', JSON.stringify(tasks));
   }, [tasks]);
+  const isTask = displayTasks.length;
   return (
     <ul className={Style.list}>
-      {displayTasks.map((task: Task) => (
-        <TaskItem task={task} key={String(task.id)} />
-      ))}
+      {isTask ? (
+        displayTasks.map((task: Task) => (
+          <TaskItem task={task} key={String(task.id)} />
+        ))
+      ) : (
+        <li className={Style.noTask}>条件に一致するタスクがありません</li>
+      )}
     </ul>
   );
 };
