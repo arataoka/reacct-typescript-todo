@@ -1,4 +1,4 @@
-import React, { useContext, useState, useCallback } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import AppContext from '../../contexts/AppContext';
 import Style from './_Controller.module.scss';
 
@@ -8,7 +8,7 @@ const Controller = () => {
     dispatch,
   } = useContext(AppContext);
 
-  useCallback(() => {
+  useEffect(() => {
     const term = (isDone: boolean) => {
       if (tasks.every((task: { isDone: boolean }) => task.isDone === isDone)) {
         setOrder(!isDone); //全て完了なら未完了に 全て未完了なら完了に
