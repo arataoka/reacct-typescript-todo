@@ -1,7 +1,11 @@
 import React from 'react';
 import Style from './Layout.module.scss';
 
-const Layout = ({ children }: any) => {
+type Props = {
+  children: React.ReactNode;
+};
+
+const Layout = ({ children }: Props) => {
   return <div className={Style.wrapper}>{children}</div>;
 };
 

@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import AppContext from '../../contexts/AppContext';
-import Style from './_Controller.module.scss';
+import Style from './Controller.module.scss';
 
 const Controller = () => {
   const {
