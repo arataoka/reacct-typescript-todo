@@ -7,8 +7,9 @@ import Controller from './components/Controller/Controller';
 import Filter from './components/Filter/Filter';
 import reducer from './reducers';
 import AppContext from './contexts/AppContext';
+import { GlobalState } from './types';
 
-const initialState = {
+const initialState: GlobalState = {
   tasks: [
     {
       id: 1,
@@ -25,7 +26,7 @@ const initialState = {
 };
 
 const App: React.FC = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer<any>(reducer, initialState);
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       <Layout>

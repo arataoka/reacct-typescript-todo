@@ -8,9 +8,10 @@ import {
   FILTER_TASK,
   FETCH_TASKS,
 } from '../actions';
+import { Task, TaskAction } from '../types';
 
 // ここはtasksのみの状態を管理しているところになる。
-const tasks = (state = [], action: any) => {
+const tasks = (state: Task[] = [], action: TaskAction) => {
   switch (action.type) {
     case ADD_ITEM:
       return [...state, { id: action.id, title: action.title, isDone: false }];
