@@ -14,8 +14,8 @@ const TaskList: React.FC = () => {
     state: { filter, tasks },
     dispatch,
   } = useContext(AppContext);
-  const [isTask, setIsTask] = useState(true);
-  const [displayTasks, setDisplayTasks] = useState([tasks]);
+  const [isTask, setIsTask] = useState<boolean>(true);
+  const [displayTasks, setDisplayTasks] = useState<Task[]>(tasks);
   //表示するタスクを設定
   useEffect(() => {
     const taskList = tasks.filter((task: { isDone: boolean }) => {

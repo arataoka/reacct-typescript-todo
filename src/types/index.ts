@@ -10,8 +10,8 @@ export interface TaskAction {
     | 'CHANGE_IS_DONE'
     | 'DELETE_ITEM'
     | 'DELETE_ALL'
-    | 'ALL_DONE'
-    | 'ALL_YET'
+    | 'TO_ALL_DONE'
+    | 'TO_ALL_YET'
     | 'FETCH_TASKS';
   id: number;
   title: string;

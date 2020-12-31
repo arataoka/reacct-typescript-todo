@@ -5,7 +5,7 @@ import Style from './TaskInput.module.scss';
 
 const TaskInput = () => {
   const { state, dispatch } = useContext(AppContext);
-  const [text, setText] = useState('');
+  const [text, setText] = useState<string>('');
   const ids = state.tasks.map((task: { id: number }) => task.id);
   const maxId = ids.length ? Math.max(...ids) + 1 : 1;
   const addItem = () => {

@@ -3,8 +3,8 @@ import {
   CHANGE_IS_DONE,
   DELETE_ITEM,
   DELETE_ALL,
-  ALL_DONE,
-  ALL_YET,
+  TO_ALL_DONE,
+  TO_ALL_YET,
   FETCH_TASKS,
 } from '../actions';
 import { Task, TaskAction } from '../types';
@@ -22,11 +22,11 @@ const tasks = (state: Task[] = [], action: TaskAction) => {
       return state.filter(({ id }) => id !== action.id);
     case DELETE_ALL:
       return [];
-    case ALL_DONE:
+    case TO_ALL_DONE:
       return state.map((task: { id: number; isDone: boolean }) => {
         return { ...task, isDone: true };
       });
-    case ALL_YET:
+    case TO_ALL_YET:
       return state.map((task: { id: number; isDone: boolean }) => {
         return { ...task, isDone: false };
       });

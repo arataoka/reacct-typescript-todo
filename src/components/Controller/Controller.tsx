@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import AppContext from '../../contexts/AppContext';
 import Style from './Controller.module.scss';
-import { DELETE_ALL, ALL_DONE, ALL_YET } from '../../actions';
+import { DELETE_ALL, TO_ALL_DONE, TO_ALL_YET } from '../../actions';
 
 const Controller = () => {
   const {
@@ -9,12 +9,12 @@ const Controller = () => {
     dispatch,
   } = useContext(AppContext);
   //全て完了なら「全て未完了にする」 全て未完了なら「全て完了にする」
-  const [order, setOrder] = useState(true);
-  const buttonName = order ? '全て完了にする' : '全て未完了にする';
+  const [completeButton, setCompleteButton] = useState<boolean>(true);
+  const buttonName = completeButton ? '全て完了にする' : '全て未完了にする';
   useEffect(() => {
     const term = (isDone: boolean) => {
       if (tasks.every((task: { isDone: boolean }) => task.isDone === isDone)) {
-        setOrder(!isDone);
+        setCompleteButton(!isDone);
       }
     };
     term(true);
@@ -26,14 +26,14 @@ const Controller = () => {
     });
   };
   const toggleAll = () => {
-    const type = order ? ALL_DONE : ALL_YET;
+    const type = completeButton ? TO_ALL_DONE : TO_ALL_YET;
     dispatch({
       type,
-      order,
+      completeButton,
     });
   };
   //下記の書き方だとunknown classNameのエラーが出る
-  const buttonClass = order
+  const buttonClass = completeButton
     ? Style['button--complete']
     : Style['button--incomplete'];
   return (
