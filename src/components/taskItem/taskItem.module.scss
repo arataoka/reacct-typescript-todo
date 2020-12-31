@@ -1,6 +1,8 @@
 .listItem{
- margin-bottom: 15px;
   position: relative;
+  &:not(:last-child){
+    margin-bottom: 15px;
+  }
 }
 label {
   display: inline-block; // to make it easier to click

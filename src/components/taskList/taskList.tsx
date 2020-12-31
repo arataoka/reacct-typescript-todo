@@ -3,6 +3,8 @@ import AppContext from '../../contexts/AppContext';
 import TaskItem from '../taskItem/taskItem';
 import { Task } from '../../types';
 import Style from './taskList.module.scss';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import fadeTransition from '../transition/fade.module.scss';
 
 // tasksは分割代入で取得する
 const TaskList: React.FC = () => {
@@ -10,6 +12,7 @@ const TaskList: React.FC = () => {
     state: { filter, tasks },
     dispatch,
   } = useContext(AppContext);
+  const [isTask, setIsTask] = useState(true);
   const [displayTasks, setDisplayTasks] = useState([tasks]);
   useEffect(() => {
     const taskList = tasks.filter((task: { isDone: boolean }) => {
@@ -29,17 +32,30 @@ const TaskList: React.FC = () => {
   useEffect(() => {
     localStorage.setItem('todo', JSON.stringify(tasks));
   }, [tasks]);
-  const isTask = displayTasks.length;
+  useEffect(() => {
+    setIsTask(displayTasks.length !== 0);
+  }, [displayTasks]);
+  //strict modeでエラーが生じる。原因不明
   return (
-    <ul className={Style.list}>
+    <TransitionGroup in="true" component="ul" className={Style.list}>
       {isTask ? (
         displayTasks.map((task: Task) => (
-          <TaskItem task={task} key={String(task.id)} />
+          <CSSTransition
+            appear={true}
+            classNames={fadeTransition}
+            timeout={300}
+            key={String(task.id)}
+            in={isTask}
+          >
+            <TaskItem task={task} />
+          </CSSTransition>
         ))
       ) : (
-        <li className={Style.noTask}>条件に一致するタスクがありません</li>
+        <CSSTransition classNames={fadeTransition} timeout={100}>
+          <li className={Style.noTask}>条件に一致するタスクがありません</li>
+        </CSSTransition>
       )}
-    </ul>
+    </TransitionGroup>
   );
 };
 
