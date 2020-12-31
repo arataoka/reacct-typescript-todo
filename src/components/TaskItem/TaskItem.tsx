@@ -1,25 +1,24 @@
 import React, { useContext } from 'react';
 import { Task } from '../../types';
 import AppContext from '../../contexts/AppContext';
-import Style from './taskItem.module.scss';
+import Style from './TaskItem.module.scss';
+import { CHANGE_IS_DONE, DELETE_ITEM } from '../../actions';
 
 type Props = {
   task: Task;
 };
 
-// tasksは分割代入で取得する
-// オブジェクトをそのまま表示することができない。
 const TaskItem: React.FC<Props> = ({ task }) => {
   const { dispatch } = useContext(AppContext);
   const changeIsDone = () => {
     dispatch({
-      type: 'CHANGE_IS_DONE',
+      type: CHANGE_IS_DONE,
       id: task.id,
     });
   };
   const deleteItem = () => {
     dispatch({
-      type: 'DELETE_ITEM',
+      type: DELETE_ITEM,
       id: task.id,
     });
   };

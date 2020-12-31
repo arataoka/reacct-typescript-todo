@@ -5,7 +5,6 @@ import {
   DELETE_ALL,
   ALL_DONE,
   ALL_YET,
-  FILTER_TASK,
   FETCH_TASKS,
 } from '../actions';
 import { Task, TaskAction } from '../types';
@@ -28,10 +27,6 @@ const tasks = (state: Task[] = [], action: TaskAction) => {
         return { ...task, isDone: true };
       });
     case ALL_YET:
-      return state.map((task: { id: number; isDone: boolean }) => {
-        return { ...task, isDone: false };
-      });
-    case FILTER_TASK:
       return state.map((task: { id: number; isDone: boolean }) => {
         return { ...task, isDone: false };
       });

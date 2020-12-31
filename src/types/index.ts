@@ -6,13 +6,12 @@ export interface Task {
 
 export interface TaskAction {
   type:
-    | 'ADD_ITEM'
+    | 'ADD_ITEM' //変数が使用できない
     | 'CHANGE_IS_DONE'
     | 'DELETE_ITEM'
     | 'DELETE_ALL'
     | 'ALL_DONE'
     | 'ALL_YET'
-    | 'FILTER_TASK'
     | 'FETCH_TASKS';
   id: number;
   title: string;

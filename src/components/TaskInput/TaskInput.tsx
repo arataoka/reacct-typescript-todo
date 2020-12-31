@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import AppContext from '../../contexts/AppContext';
 import { ADD_ITEM } from '../../actions';
-import Style from './taskInput.module.scss';
+import Style from './TaskInput.module.scss';
 
 const TaskInput = () => {
   const { state, dispatch } = useContext(AppContext);

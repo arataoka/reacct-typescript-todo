@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import AppContext from '../../contexts/AppContext';
 import { SET_FILTER } from '../../actions';
+import { ALL, DONE, YET } from '../../constants';
 
 const Filter = () => {
   const {
@@ -15,9 +16,9 @@ const Filter = () => {
   };
   return (
     <select onChange={(e) => setFilter(e.target.value)} value={filter}>
-      <option value="ALL">全て</option>
-      <option value="DONE">完了のみ</option>
-      <option value="YET">未完了のみ</option>
+      <option value={ALL}>全て</option>
+      <option value={DONE}>完了のみ</option>
+      <option value={YET}>未完了のみ</option>
     </select>
   );
 };

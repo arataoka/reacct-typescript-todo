@@ -1,13 +1,13 @@
 import React, { useReducer } from 'react';
-import './styles/base.scss';
-import Layout from './components/Layout/Layout';
-import TaskList from './components/taskList/taskList';
-import TaskInput from './components/taskInput/taskInput';
-import Controller from './components/Controller/Controller';
-import Filter from './components/Filter/Filter';
-import reducer from './reducers';
-import AppContext from './contexts/AppContext';
-import { GlobalState } from './types';
+import '../styles/base.scss';
+import Layout from './Layout/Layout';
+import TaskList from './TaskList/TaskList';
+import TaskInput from './TaskInput/TaskInput';
+import Controller from './Controller/Controller';
+import Filter from './Filter/Filter';
+import reducer from '../reducers';
+import AppContext from '../contexts/AppContext';
+import { GlobalState } from '../types';
 
 const initialState: GlobalState = {
   tasks: [
