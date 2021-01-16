@@ -1,13 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
-import AppContext from '../../contexts/AppContext';
+import { Store } from '../../store';
 import Style from './Controller.module.scss';
 import { DELETE_ALL, TO_ALL_DONE, TO_ALL_YET } from '../../actions';
 
-const Controller = () => {
+const Controller: React.FC = () => {
   const {
-    state: { tasks },
-    dispatch,
-  } = useContext(AppContext);
+    globalState: { tasks },
+    setGlobalState,
+  } = useContext(Store);
   //全て完了なら「全て未完了にする」 全て未完了なら「全て完了にする」
   const [completeButton, setCompleteButton] = useState<boolean>(true);
   const buttonName = completeButton ? '全て完了にする' : '全て未完了にする';
@@ -21,15 +21,14 @@ const Controller = () => {
     term(false);
   }, [tasks]);
   const deleteAll = () => {
-    dispatch({
+    setGlobalState({
       type: DELETE_ALL,
     });
   };
   const toggleAll = () => {
     const type = completeButton ? TO_ALL_DONE : TO_ALL_YET;
-    dispatch({
+    setGlobalState({
       type,
-      completeButton,
     });
   };
   //下記の書き方だとunknown classNameのエラーが出る

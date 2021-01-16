@@ -20,11 +20,6 @@ export interface TaskAction {
 }
 
 export interface FilterAction {
-  type: 'SET_FILTER';
+  type: string;
   value: string;
-}
-
-export interface GlobalState {
-  tasks: Task[];
-  filter: string;
 }

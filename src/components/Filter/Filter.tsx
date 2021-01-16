@@ -1,15 +1,15 @@
 import React, { useContext } from 'react';
-import AppContext from '../../contexts/AppContext';
+import { Store } from '../../store';
 import { SET_FILTER } from '../../actions';
 import { ALL, DONE, YET } from '../../constants';
 
-const Filter = () => {
+const Filter: React.FC = () => {
   const {
-    state: { filter },
-    dispatch,
-  } = useContext(AppContext);
+    globalState: { filter },
+    setGlobalState,
+  } = useContext(Store);
   const setFilter = (value: string) => {
-    dispatch({
+    setGlobalState({
       type: SET_FILTER,
       value,
     });

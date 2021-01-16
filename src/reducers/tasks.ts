@@ -8,14 +8,13 @@ import {
   FETCH_TASKS,
 } from '../actions';
 import { Task, TaskAction } from '../types';
-
-// ここはtasksのみの状態を管理しているところになる。
+//typescript分割代入できないか？
 const tasks = (state: Task[] = [], action: TaskAction) => {
   switch (action.type) {
     case ADD_ITEM:
       return [...state, { id: action.id, title: action.title, isDone: false }];
     case CHANGE_IS_DONE:
-      return state.map((task: { id: number; isDone: boolean }) =>
+      return state.map((task: Task) =>
         task.id === action.id ? { ...task, isDone: !task.isDone } : task
       );
     case DELETE_ITEM:
@@ -23,11 +22,11 @@ const tasks = (state: Task[] = [], action: TaskAction) => {
     case DELETE_ALL:
       return [];
     case TO_ALL_DONE:
-      return state.map((task: { id: number; isDone: boolean }) => {
+      return state.map((task: Task) => {
         return { ...task, isDone: true };
       });
     case TO_ALL_YET:
-      return state.map((task: { id: number; isDone: boolean }) => {
+      return state.map((task: Task) => {
         return { ...task, isDone: false };
       });
     case FETCH_TASKS:

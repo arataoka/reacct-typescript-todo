@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Task } from '../../types';
-import AppContext from '../../contexts/AppContext';
+import { Store } from '../../store';
 import Style from './TaskItem.module.scss';
 import { CHANGE_IS_DONE, DELETE_ITEM } from '../../actions';
 
@@ -9,15 +9,15 @@ type Props = {
 };
 
 const TaskItem: React.FC<Props> = ({ task }) => {
-  const { dispatch } = useContext(AppContext);
+  const { setGlobalState } = useContext(Store);
   const changeIsDone = () => {
-    dispatch({
+    setGlobalState({
       type: CHANGE_IS_DONE,
       id: task.id,
     });
   };
   const deleteItem = () => {
-    dispatch({
+    setGlobalState({
       type: DELETE_ITEM,
       id: task.id,
     });

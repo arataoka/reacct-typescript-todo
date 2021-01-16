@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import AppContext from '../../contexts/AppContext';
+import { Store } from '../../store';
 import TaskItem from '../TaskItem/TaskItem';
 import { Task } from '../../types';
 import Style from './TaskList.module.scss';
@@ -11,9 +11,9 @@ import { ALL, DONE, STORAGE_KEY } from '../../constants';
 // tasksは分割代入で取得する
 const TaskList: React.FC = () => {
   const {
-    state: { filter, tasks },
-    dispatch,
-  } = useContext(AppContext);
+    globalState: { filter, tasks },
+    setGlobalState,
+  } = useContext(Store);
   const [isTask, setIsTask] = useState<boolean>(true);
   const [displayTasks, setDisplayTasks] = useState<Task[]>(tasks);
   //表示するタスクを設定
@@ -28,11 +28,11 @@ const TaskList: React.FC = () => {
   useEffect(() => {
     const items = localStorage.getItem(STORAGE_KEY);
     if (!items) return;
-    dispatch({
+    setGlobalState({
       type: FETCH_TASKS,
       tasks: JSON.parse(items),
     });
-  }, [dispatch]);
+  }, [setGlobalState]);
   //ローカルストレージへ保存
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
@@ -41,7 +41,7 @@ const TaskList: React.FC = () => {
   useEffect(() => {
     setIsTask(displayTasks.length !== 0);
   }, [displayTasks]);
-  //strict modeでエラーが生じる。原因不明
+  //strict modeでtransition-groupでエラーが生じる。原因不明
   return (
     <TransitionGroup in="true" component="ul" className={Style.list}>
       {isTask ? (

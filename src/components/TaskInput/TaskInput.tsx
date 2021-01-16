@@ -1,16 +1,19 @@
 import React, { useContext, useState } from 'react';
-import AppContext from '../../contexts/AppContext';
+import { Store } from '../../store';
 import { ADD_ITEM } from '../../actions';
 import Style from './TaskInput.module.scss';
 
-const TaskInput = () => {
-  const { state, dispatch } = useContext(AppContext);
+const TaskInput: React.FC = () => {
+  const {
+    globalState: { tasks },
+    setGlobalState,
+  } = useContext(Store);
   const [text, setText] = useState<string>('');
-  const ids = state.tasks.map((task: { id: number }) => task.id);
+  const ids = tasks.map((task: { id: number }) => task.id);
   const maxId = ids.length ? Math.max(...ids) + 1 : 1;
   const addItem = () => {
     if (!text) return;
-    dispatch({
+    setGlobalState({
       type: ADD_ITEM,
       title: text,
       id: maxId,
